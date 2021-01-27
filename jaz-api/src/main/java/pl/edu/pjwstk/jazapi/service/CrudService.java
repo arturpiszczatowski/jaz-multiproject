@@ -4,6 +4,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import pl.edu.pjwstk.jazapi.model.Car;
+import pl.edu.pjwstk.jazapi.repository.CarRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,6 +51,7 @@ public abstract class CrudService<T extends Identifiable> {
     public T getById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
 
     public void delete(Long id) {
         Optional<T> item = repository.findById(id);

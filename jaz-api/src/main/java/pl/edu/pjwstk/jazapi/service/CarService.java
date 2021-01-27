@@ -1,5 +1,6 @@
 package pl.edu.pjwstk.jazapi.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.edu.pjwstk.jazapi.model.AddOn;
 import pl.edu.pjwstk.jazapi.model.Car;
@@ -7,14 +8,17 @@ import pl.edu.pjwstk.jazapi.repository.AddOnRepository;
 import pl.edu.pjwstk.jazapi.repository.CarRepository;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static pl.edu.pjwstk.jazapi.util.Utils.fallbackIfNull;
 
 @Service
 public class CarService extends CrudService<Car> {
     private final AddOnRepository addOnRepository;
+
 
     public CarService(CarRepository carRepository, AddOnRepository addOnRepository) {
         super(carRepository);
@@ -60,4 +64,12 @@ public class CarService extends CrudService<Car> {
             return updateEntity;
         }
     }
+
+    public List<Car> getByManufacturer(String manufacturer) {
+        return ((CarRepository) repository).getByManufacturer(manufacturer);
+        //        return repository.findAll().stream()
+        //                .filter(car -> car.getManufacturer().equals(manufacturer))
+        //                .collect(Collectors.toList());
+    }
+
 }

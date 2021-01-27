@@ -13,7 +13,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public abstract class CrudController<T extends Identifiable, R extends Identifiable> {
-    private final CrudService<T> service;
+    protected final CrudService<T> service;
 
     public CrudController(CrudService<T> service) {
         this.service = service;
@@ -52,6 +52,7 @@ public abstract class CrudController<T extends Identifiable, R extends Identifia
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PutMapping
     public ResponseEntity<Void> update(@RequestBody T t) {
